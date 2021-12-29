@@ -13,7 +13,7 @@ const recorder = new Recorder()
 startButton.addEventListener('click', function () {
     player.src = ""
     recorder.start()
-    tbody.appendChild("<tr><td><audio id='player' controls src=''></audio></td><td><a id='dl'>DL</a></td></tr>")
+    tbody.append("<tr><td><audio id='player' controls src=''></audio></td><td><a id='dl'>DL</a></td></tr>")
 });
 
 // stop button
