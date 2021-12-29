@@ -21,6 +21,7 @@ export default class {
       audio: true,
       video: false
     }))
+    console.log(this.wavSamples)
     this.captureStart()
   }
 
