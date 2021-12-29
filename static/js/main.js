@@ -17,7 +17,7 @@ startButton.addEventListener('click', function () {
 stopButton.addEventListener('click', function () {
     const url = recorder.stop()
     console.log(url)
-    console.log(url)
     player.src = url
     dla.href = url
+    dla.download = 'test.wav';
 });
