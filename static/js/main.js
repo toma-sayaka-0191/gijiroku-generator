@@ -25,6 +25,8 @@ startButton.addEventListener('click', function () {
         player = document.getElementById('player' + cnt);
         dla = document.getElementById('dl' + cnt);
 
+        sleep(5000);
+        
         url = recorder.stop()
         player.src = url
         dla.href = url
