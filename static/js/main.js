@@ -16,7 +16,6 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     const url = recorder.stop()
-    console.log(url)
     player.src = url
     dla.href = url
     dla.download = 'test.wav';
