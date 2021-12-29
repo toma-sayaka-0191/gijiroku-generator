@@ -1,8 +1,10 @@
 import Recorder from "./recorder.js"
 
-const player = document.getElementById('player');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
+
+const tbody = document.getElementById('tbody');
+const player = document.getElementById('player');
 const dla = document.getElementById('dl');
 
 const recorder = new Recorder()
@@ -11,6 +13,7 @@ const recorder = new Recorder()
 startButton.addEventListener('click', function () {
     player.src = ""
     recorder.start()
+    tbody.appendChild("<tr><td><audio id='player' controls src=''></audio></td><td><a id='dl'>DL</a></td></tr>")
 });
 
 // stop button
