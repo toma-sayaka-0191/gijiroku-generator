@@ -13,14 +13,14 @@ let flg = false;
 const recorder = new Recorder()
 
 // start button
-startButton.addEventListener('click', function () {
+startButton.addEventListener('click', async function () {
 
     let url = ""
 
     recorder.start()
 
     do {
-        setTimeout(DoWhileRecord, 5000);
+        await setTimeout(DoWhileRecord, 5000);
 
         url = recorder.stop()
         player.src = url
