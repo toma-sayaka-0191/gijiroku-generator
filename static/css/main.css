@@ -1,3 +1,5 @@
-th, td {
-    border: solid;
+table th,td,tr{
+	padding: 5px;
+	border: solid #000000 1px;
+	white-space: nowrap;
 }
