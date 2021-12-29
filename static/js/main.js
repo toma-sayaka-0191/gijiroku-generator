@@ -20,13 +20,8 @@ startButton.addEventListener('click', function () {
     recorder.start()
 
     do {
-        cnt+= 1;
-        tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
-        player = document.getElementById('player' + cnt);
-        dla = document.getElementById('dl' + cnt);
+        setTimeout(DoWhileRecord, 5000);
 
-        sleep(5000);
-        
         url = recorder.stop()
         player.src = url
         dla.href = url
@@ -38,8 +33,11 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     flg = true
-    //const url = recorder.stop()
-    //player.src = url
-    //dla.href = url
-    //dla.download = 'voice_' + cnt + '.wav';
 });
+
+function DoWhileRecord(){
+    cnt+= 1;
+    tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
+    player = document.getElementById('player' + cnt);
+    dla = document.getElementById('dl' + cnt);
+};
