@@ -16,10 +16,10 @@ const recorder = new Recorder()
 // start button
 startButton.addEventListener('click', async function () {
 
-    recorder.start()
+    await recorder.start()
 
     do {
-        await setTimeout(DoWhileStart, 5000);
+        await DoWhileStart
         await DoWhileStop
     } while (flg = false);
 });
@@ -30,15 +30,18 @@ stopButton.addEventListener('click', function () {
 });
 
 function DoWhileStart(){
-    cnt+= 1;
+    cnt+= 1
     tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
-    player = document.getElementById('player' + cnt);
-    dla = document.getElementById('dl' + cnt);
+    player = document.getElementById('player' + cnt)
+    dla = document.getElementById('dl' + cnt)
+    console.log('DoWhileStart')
 };
 
 function DoWhileStop(){
     url = recorder.stop()
     player.src = url
     dla.href = url
-    dla.download = 'voice_' + cnt + '.wav';
+    dla.download = 'voice_' + cnt + '.wav'
+    console.log('DoWhileStop')
+    console.log(flg)
 };
