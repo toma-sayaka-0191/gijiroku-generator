@@ -5,7 +5,7 @@ const stopButton = document.getElementById('stop');
 
 const tbody = document.getElementById('tbody');
 
-let cnt;
+let cnt = 0;
 let player;
 let dla;
 
@@ -15,7 +15,8 @@ const recorder = new Recorder()
 startButton.addEventListener('click', function () {
     recorder.start()
 
-    cnt=cnt+1
+    cnt+= 1;
+    console.og(cnt)
     tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
     player = document.getElementById('player' + cnt);
     dla = document.getElementById('dl' + cnt);
