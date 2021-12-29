@@ -4,8 +4,10 @@ const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 
 const tbody = document.getElementById('tbody');
-const player = document.getElementById('player');
-const dla = document.getElementById('dl');
+
+let cnt;
+let player;
+let dla;
 
 const recorder = new Recorder()
 
@@ -13,7 +15,11 @@ const recorder = new Recorder()
 startButton.addEventListener('click', function () {
     player.src = ""
     recorder.start()
-    tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player' controls src=''></audio></td><td><a id='dl'>DL</a></td></tr>")
+
+    cnt=cnt+1
+    tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
+    player = document.getElementById('player' + cnt);
+    dla = document.getElementById('dl' + cnt);
 });
 
 // stop button
