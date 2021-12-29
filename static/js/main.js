@@ -13,13 +13,14 @@ const recorder = new Recorder()
 
 // start button
 startButton.addEventListener('click', function () {
-    player.src = ""
     recorder.start()
 
     cnt=cnt+1
     tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
     player = document.getElementById('player' + cnt);
     dla = document.getElementById('dl' + cnt);
+
+    player.src = ""
 });
 
 // stop button
