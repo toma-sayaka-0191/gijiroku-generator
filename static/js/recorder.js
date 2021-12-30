@@ -51,6 +51,12 @@ export default class {
     this.processor.onaudioprocess = (ev) => {
       const sample = ev.inputBuffer.getChannelData(0)
       this.wavSamples.push(new Float32Array(sample))
+
+      do {
+        await DoWhileStart
+        await DoWhileStop
+      } while (flg = false);
+
     }
 
     this.input.connect(this.processor)
