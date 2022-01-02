@@ -1,7 +1,12 @@
+import init from "./init.js"
 import Encoder from "./encoder.js"
 
+let init
+
 export default class {
+  
   constructor() {
+    init = new init()
     this.encoderOptions = {
       bitRate: 128,
       sampleRate: 44100
@@ -49,11 +54,11 @@ export default class {
     this.processor = this.context.createScriptProcessor(this.bufferSize, 1, 1)
 
     this.processor.onaudioprocess = (ev) => {
-      const sample = ev.inputBuffer.getChannelData(0)
-      this.wavSamples.push(new Float32Array(sample))
-
+      let sample
       do {
         await DoWhileStart
+        sample = await ev.inputBuffer.getChannelData(0)
+        await this.wavSamples.push(new Float32Array(sample))
         await DoWhileStop
       } while (flg = false);
 
@@ -63,3 +68,20 @@ export default class {
     this.processor.connect(this.context.destination)
   }
 }
+
+function DoWhileStart(){
+  cnt+= 1
+  init.init.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
+  init.player = document.getElementById('player' + cnt)
+  init.dla = document.getElementById('dl' + cnt)
+  console.log('DoWhileStart')
+};
+
+function DoWhileStop(){
+  init.url = recorder.stop()
+  init.player.src = url
+  init.dla.href = url
+  init.dla.download = 'voice_' + cnt + '.wav'
+  console.log('DoWhileStop')
+  console.log(init.flg)
+};
