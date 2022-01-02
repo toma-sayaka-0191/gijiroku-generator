@@ -66,21 +66,22 @@ export default class {
     this.input.connect(this.processor)
     this.processor.connect(this.context.destination)
   }
+
+
+  DoWhileStart(){
+    cnt+= 1
+    init.init.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
+    init.player = document.getElementById('player' + cnt)
+    init.dla = document.getElementById('dl' + cnt)
+    console.log('DoWhileStart')
+  };
+  
+  DoWhileStop(){
+    init.url = recorder.stop()
+    init.player.src = url
+    init.dla.href = url
+    init.dla.download = 'voice_' + cnt + '.wav'
+    console.log('DoWhileStop')
+    console.log(init.flg)
+  };
 }
-
-function DoWhileStart(){
-  cnt+= 1
-  init.init.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
-  init.player = document.getElementById('player' + cnt)
-  init.dla = document.getElementById('dl' + cnt)
-  console.log('DoWhileStart')
-};
-
-function DoWhileStop(){
-  init.url = recorder.stop()
-  init.player.src = url
-  init.dla.href = url
-  init.dla.download = 'voice_' + cnt + '.wav'
-  console.log('DoWhileStop')
-  console.log(init.flg)
-};
