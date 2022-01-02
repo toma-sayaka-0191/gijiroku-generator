@@ -1,12 +1,11 @@
-import init from "./init.js"
+import Init from "./init.js"
 import Encoder from "./encoder.js"
 
-let init
+const init= new Init()
 
 export default class {
   
   constructor() {
-    init = new init()
     this.encoderOptions = {
       bitRate: 128,
       sampleRate: 44100

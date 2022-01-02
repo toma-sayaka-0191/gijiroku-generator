@@ -1,8 +1,8 @@
-import init from "./init.js"
+import Init from "./init.js"
 import Recorder from "./recorder.js"
 
 
-const init = new init()
+const init = new Init()
 const recorder = new Recorder()
 
 // start button
