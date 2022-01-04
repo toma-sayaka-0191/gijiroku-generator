@@ -7,7 +7,7 @@ app = Flask(__name__)
 def hello():
     return render_template('index.html')
 
-@app.route('/get', methods=['GET'])
+""" @app.route('/get', methods=['GET'])
 def get():
     result = ""
     return result
@@ -15,7 +15,7 @@ def get():
 @app.route('/post', methods=['POST'])
 def post():
     result = request.form["param"]
-    return make_response(result)
+    return make_response(result) """
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
