@@ -8,17 +8,20 @@ let url = '';
 let player;
 let dla;
 let stream;
-let flg = false;
+let flg;
 
 // start button
 startButton.addEventListener('click', async function () {
+    flg = await false;
     await AddRow();
     do {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-        setTimeout(function(){}, 10000);
-        player.srcObject = stream;
-        console.log(stream)
-        stream.getTracks().forEach((track) => track.stop())
+        setTimeout(async function(){
+            player.srcObject = await stream;
+            await console.log(stream)
+            await stream.getTracks().forEach((track) => track.stop())
+        }, 10000);
+
     } while (flg = false);
     
 
