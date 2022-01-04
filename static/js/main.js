@@ -12,17 +12,17 @@ let flg;
 
 // start button
 startButton.addEventListener('click', async function () {
-    flg = await false;
+    flg = false;
     await AddRow();
     do {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
         setTimeout(async function(){
-            player.srcObject = await stream;
-            await console.log(stream)
-            await stream.getTracks().forEach((track) => track.stop())
+            player.srcObject = stream;
+            console.log(stream)
+            stream.getTracks().forEach((track) => track.stop())
         }, 10000);
 
-    } while (flg = false);
+    } while (flg == false);
     
 
 });
