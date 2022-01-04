@@ -9,27 +9,30 @@ let player;
 let dla;
 let stream;
 let flg;
+let mr;
+let chunks;
+let aaa;
 
 // start button
 startButton.addEventListener('click', async function () {
-    flg = false;
-    await AddRow();
+    flg = false
+    await AddRow()
     do {
-        stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-        setTimeout(async function(){
-            player.srcObject = stream;
-            console.log(stream)
-            stream.getTracks().forEach((track) => track.stop())
-        }, 10000);
-
-    } while (flg == false);
-    
-
+        start()
+        do {
+            aaa = mr.requestData()
+            console.log(aaa)
+            //if (MediaRecorder.requestData() > 0) {
+            //    stop()
+            //}
+            
+        } while (flg == false)
+    } while (flg == false)
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    flg = true;
+    flg = true
 });
 
 function AddRow(){
@@ -39,6 +42,20 @@ function AddRow(){
     dla = document.getElementById('dl' + cnt)
 };
   
+async function start() {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    mr = new MediaRecorder(stream, {mimeType: 'audio/webm'})
+    mr.addEventListener('dataavailable', function(e){
+        if (e.data.size > 0) {
+            chunks.push(e.data)
+            player.srcObject = stream
+        }
+    })
+};
+
+async function stop() {
+    stream.getTracks().forEach((track) => track.stop())
+};
 
 /* async function start() {
     stream = (await navigator.mediaDevices.getUserMedia({
