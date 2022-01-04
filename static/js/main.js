@@ -48,6 +48,7 @@ async function start() {
             chunks.push(e.data)
         }
     })
+    mr.start
 };
 
 async function stop() {
