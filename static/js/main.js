@@ -8,6 +8,7 @@ const recorder = new Recorder()
 // start button
 startButton.addEventListener('click', async function () {
     await recorder.start()
+    console.log("A")
 });
 
 // stop button
