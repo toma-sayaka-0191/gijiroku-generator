@@ -11,7 +11,6 @@ let stream;
 let flg;
 let mr;
 let chunks;
-let aaa;
 
 // start button
 startButton.addEventListener('click', async function () {
@@ -20,12 +19,11 @@ startButton.addEventListener('click', async function () {
     do {
         start()
         do {
-            aaa = mr.requestData()
-            console.log(aaa)
+            mr.requestData()
+            console.log(chunks)
             //if (MediaRecorder.requestData() > 0) {
             //    stop()
             //}
-            
         } while (flg == false)
     } while (flg == false)
 });
@@ -48,13 +46,13 @@ async function start() {
     mr.addEventListener('dataavailable', function(e){
         if (e.data.size > 0) {
             chunks.push(e.data)
-            player.srcObject = stream
         }
     })
 };
 
 async function stop() {
     stream.getTracks().forEach((track) => track.stop())
+    player.srcObject = stream
 };
 
 /* async function start() {
