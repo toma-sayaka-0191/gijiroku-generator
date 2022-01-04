@@ -15,15 +15,18 @@ startButton.addEventListener('click', async function () {
     await AddRow();
     do {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+        setTimeout(function(){}, 10000);
         player.srcObject = stream;
+        console.log(stream)
+        stream.getTracks().forEach((track) => track.stop())
     } while (flg = false);
-    stream.getTracks().forEach((track) => track.stop())
+    
 
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    flg = True;
+    flg = true;
 });
 
 function AddRow(){
