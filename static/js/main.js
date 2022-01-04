@@ -19,7 +19,7 @@ startButton.addEventListener('click', async function () {
     do {
         start()
         do {
-            mr.requestData()
+            mcdataavailable()
             console.log(chunks)
             //if (MediaRecorder.requestData() > 0) {
             //    stop()
@@ -51,9 +51,13 @@ async function start() {
     mr.start
 };
 
-async function stop() {
+function stop() {
     stream.getTracks().forEach((track) => track.stop())
     player.srcObject = stream
+};
+
+function mcdataavailable() {
+    mr.requestData()
 };
 
 /* async function start() {
