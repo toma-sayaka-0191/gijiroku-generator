@@ -16,6 +16,7 @@ startButton.addEventListener('click', function () {
     recorder = new p5.SoundRecorder();
     soundFile = new p5.SoundFile();
 
+    AddRow()
     mic.start()
     recorder.setInput(mic);
     recorder.record(soundFile);
