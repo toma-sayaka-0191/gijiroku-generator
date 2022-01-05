@@ -4,7 +4,6 @@ const stopButton = document.getElementById('stop');
 const tbody = document.getElementById('tbody');
 
 let cnt = 0;
-let url = '';
 let player;
 let dla;
 let mic, recorder, soundFile;
@@ -25,7 +24,7 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     let url
-    recorder.stop();
+    recorder.stop()
     mic.stop()
     url = saveSound(soundFile, 'voice_' + cnt + '.wav')
     player.src = url
