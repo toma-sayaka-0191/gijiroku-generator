@@ -3,7 +3,7 @@ const stopButton = document.getElementById('stop');
 
 const tbody = document.getElementById('tbody');
 
-const mr = new MediaRecorder(stream, {mimeType: 'audio/webm'})
+
 
 let cnt = 0;
 let url = '';
@@ -11,9 +11,9 @@ let player;
 let dla;
 let flg;
 let chunks;
-let stream;
+let stream=[];
 
-
+const mr = new MediaRecorder(stream, {mimeType: 'audio/webm'})
 
 
 // start button
