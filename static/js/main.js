@@ -18,10 +18,6 @@ startButton.addEventListener('click', function () {
     AddRow()
     do {
         start()
-        do {
-            mcdataavailable()
-            console.log(chunks)
-        } while (flg == false)
     } while (flg == false)
 });
 
@@ -54,10 +50,6 @@ async function start() {
 function stop() {
     stream.getTracks().forEach((track) => track.stop())
     player.srcObject = stream
-};
-
-function mcdataavailable() {
-    mr.requestData()
 };
 
 /* function getFunc(url) {
