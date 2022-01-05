@@ -7,23 +7,20 @@ let cnt = 0;
 let url = '';
 let player;
 let dla;
-let stream;
 let flg;
 let mr;
 let chunks;
+let stream;
 
 // start button
-startButton.addEventListener('click', async function () {
+startButton.addEventListener('click', function () {
     flg = false
-    await AddRow()
+    AddRow()
     do {
         start()
         do {
             mcdataavailable()
             console.log(chunks)
-            //if (MediaRecorder.requestData() > 0) {
-            //    stop()
-            //}
         } while (flg == false)
     } while (flg == false)
 });
@@ -41,14 +38,17 @@ function AddRow(){
 };
   
 async function start() {
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-    mr = new MediaRecorder(stream, {mimeType: 'audio/webm'})
-    mr.addEventListener('dataavailable', function(e){
-        if (e.data.size > 0) {
-            chunks.push(e.data)
-        }
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(function(s){
+        stream = s
+        mr = new MediaRecorder(s, {mimeType: 'audio/webm'})
+        mr.addEventListener('dataavailable', function(e){
+            if (e.data.size > 0) {
+                chunks.push(e.data)
+            }
+        })
+        mr.start
     })
-    mr.start
 };
 
 function stop() {
@@ -59,16 +59,6 @@ function stop() {
 function mcdataavailable() {
     mr.requestData()
 };
-
-/* async function start() {
-    stream = (await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: false
-    }))
-    console.log(this.wavSamples)
-    this.captureStart()
-};
- */
 
 /* function getFunc(url) {
     fetch(url)
