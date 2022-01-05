@@ -16,9 +16,7 @@ let stream;
 startButton.addEventListener('click', function () {
     flg = false
     AddRow()
-    do {
-        start()
-    } while (flg == false)
+    start()
 });
 
 // stop button
@@ -36,14 +34,14 @@ function AddRow(){
 async function start() {
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(s){
-        stream = s
         mr = new MediaRecorder(s, {mimeType: 'audio/webm'})
         mr.addEventListener('dataavailable', function(e){
-            if (e.data.size > 0) {
-                chunks.push(e.data)
-            }
+            do {
+                if (e.data.size > 0) {
+                    chunks.push(e.data)
+                }
+            } while (flg == false)
         })
-        mr.start
     })
 };
 
