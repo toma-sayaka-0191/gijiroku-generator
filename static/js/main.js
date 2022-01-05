@@ -3,6 +3,8 @@ const stopButton = document.getElementById('stop');
 
 const tbody = document.getElementById('tbody');
 
+const mr = new MediaRecorder(stream, {mimeType: 'audio/webm'})
+
 let cnt = 0;
 let url = '';
 let player;
@@ -24,6 +26,12 @@ stopButton.addEventListener('click', function () {
     flg = true
 });
 
+mr.addEventListener('dataavailable', function(e){
+    if (e.data.size > 0) {
+        chunks.push(e.data)
+    }
+});
+
 function AddRow(){
     cnt+= 1
     tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='dl" + cnt + "'>DL</a></td></tr>")
@@ -31,15 +39,10 @@ function AddRow(){
     dla = document.getElementById('dl' + cnt)
 };
   
-async function start() {
+function start() {
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(s){
-        mr = new MediaRecorder(s, {mimeType: 'audio/webm'})
-        mr.addEventListener('dataavailable', function(e){
-            if (e.data.size > 0) {
-                chunks.push(e.data)
-            }
-        })
+        stream = s
     })
 };
 
