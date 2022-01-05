@@ -10,9 +10,11 @@ let url = '';
 let player;
 let dla;
 let flg;
-let mr;
 let chunks;
 let stream;
+
+
+
 
 // start button
 startButton.addEventListener('click', function () {
