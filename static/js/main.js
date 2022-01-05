@@ -36,11 +36,9 @@ async function start() {
     .then(function(s){
         mr = new MediaRecorder(s, {mimeType: 'audio/webm'})
         mr.addEventListener('dataavailable', function(e){
-            do {
-                if (e.data.size > 0) {
-                    chunks.push(e.data)
-                }
-            } while (flg == false)
+            if (e.data.size > 0) {
+                chunks.push(e.data)
+            }
         })
     })
 };
