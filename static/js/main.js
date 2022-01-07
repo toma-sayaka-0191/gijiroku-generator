@@ -13,6 +13,8 @@ startButton.addEventListener('click', function () {
     AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
+        mr = new MediaRecorder(stream)
+
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
         let processor = context.createScriptProcessor(1024, 1, 1)
