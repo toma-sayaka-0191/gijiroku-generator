@@ -6,17 +6,23 @@ const tbody = document.getElementById('tbody');
 let cnt = 0;
 let player;
 let dla;
-let lstream;
+let mr;
 
 
 // start button
 startButton.addEventListener('click', function () {
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
-        lstream=stream
-        var context = new AudioContext()
-        var input = context.createMediaStreamSource(stream)
-        var processor = context.createScriptProcessor(1024, 1, 1)
+        mr = new MediaRecorder(stream)
+        mr.ondataavailable = function(e) {
+            player.src = e
+            dla.href = e
+            dla.download = 'voice_' + cnt + '.wav'
+        }
+
+        let context = new AudioContext()
+        let input = context.createMediaStreamSource(stream)
+        let processor = context.createScriptProcessor(1024, 1, 1)
 
         input.connect(processor)
         processor.connect(context.destination)
@@ -29,11 +35,7 @@ startButton.addEventListener('click', function () {
 
 // stop button
 stopButton.addEventListener('click', function () {
-    url = window.URL.createObjectURL(lstream)
-    lstream.getTracks().forEach(track => track.stop())
-    player.src = url
-    dla.href = url
-    dla.download = 'voice_' + cnt + '.wav'
+    mr.stop();
 });
 
 function AddRow(){
