@@ -8,7 +8,6 @@ let player;
 let dla;
 let mr;
 
-
 // start button
 startButton.addEventListener('click', function () {
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
