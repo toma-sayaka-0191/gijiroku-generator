@@ -10,6 +10,7 @@ let mr;
 
 // start button
 startButton.addEventListener('click', function () {
+    AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
         mr = new MediaRecorder(stream)
