@@ -29,8 +29,8 @@ startButton.addEventListener('click', function () {
 
 // stop button
 stopButton.addEventListener('click', function () {
-    let url=lstream.getTracks().forEach(track => track.stop())
     url = window.URL.createObjectURL(lstream)
+    lstream.getTracks().forEach(track => track.stop())
     player.src = url
     dla.href = url
     dla.download = 'voice_' + cnt + '.wav'
