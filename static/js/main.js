@@ -29,7 +29,7 @@ startButton.addEventListener('click', function () {
 
 // stop button
 stopButton.addEventListener('click', function () {
-    let url=stream.getTracks().forEach(track => track.stop())
+    let url=lstream.getTracks().forEach(track => track.stop())
     url = window.URL.createObjectURL(lstream)
     player.src = url
     dla.href = url
