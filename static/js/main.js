@@ -6,27 +6,31 @@ const tbody = document.getElementById('tbody');
 let cnt = 0;
 let player;
 let dla;
-let mic, recorder, soundFile;
+let lstream;
 
 
 // start button
 startButton.addEventListener('click', function () {
-    mic = new p5.AudioIn()
-    recorder = new p5.SoundRecorder();
-    soundFile = new p5.SoundFile();
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(function(stream) {
+        lstream=stream
+        var context = new AudioContext()
+        var input = context.createMediaStreamSource(stream)
+        var processor = context.createScriptProcessor(1024, 1, 1)
 
-    AddRow()
-    mic.start()
-    recorder.setInput(mic);
-    recorder.record(soundFile);
+        input.connect(processor)
+        processor.connect(context.destination)
+
+        processor.onaudioprocess = function(e) {
+            console.log(e.inputBuffer.getChannelData(0))
+        }
+    })
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    let url
-    recorder.stop()
-    mic.stop()
-    url = saveSound(soundFile, 'voice_' + cnt + '.wav')
+    let url=stream.getTracks().forEach(track => track.stop())
+    url = window.URL.createObjectURL(lstream)
     player.src = url
     dla.href = url
     dla.download = 'voice_' + cnt + '.wav'
