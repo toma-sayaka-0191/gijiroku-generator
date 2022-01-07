@@ -31,11 +31,13 @@ startButton.addEventListener('click', function () {
         processor.onaudioprocess = function(e) {
             console.log(e.inputBuffer.getChannelData(0))
         }
+        mr.start();
     })
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
+    mr.stop();
     lstream.getTracks().forEach(track => track.stop())
 });
 
