@@ -54,12 +54,15 @@ var onAudioProcess = function (e) {
         bufferData[i] = input[i];
     }
     audioData.push(bufferData);
+    console.log(Math.abs(bufferData[0]));
     if (Math.abs(bufferData[0])<0.01){
         let url = exportWAV(audioData)
         downloadLink.href = url
         player.src = url
         downloadLink.download = 'test.wav'
         audioContext.close()
+        AddRow()
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
     }
 };
 
