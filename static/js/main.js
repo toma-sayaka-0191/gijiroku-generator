@@ -76,7 +76,7 @@ var onAudioProcess = function (e) {
     }
 
     if (maxBufFlg==true && muonFlg==false && Math.abs(bufferData[0])<0.01){
-        muonFlg==true
+        muonFlg=true
         startTime = new Date();
     }
 
