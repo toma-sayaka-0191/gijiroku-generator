@@ -6,6 +6,7 @@ const tbody = document.getElementById('tbody');
 let cnt = 0;
 let player;
 let dla;
+let blobs;
 let processor;
 
 // start button
