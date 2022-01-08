@@ -8,6 +8,7 @@ let player;
 let dla;
 let blobs;
 let lstream;
+let processor;
 
 // start button
 startButton.addEventListener('click', function () {
@@ -18,7 +19,7 @@ startButton.addEventListener('click', function () {
         
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
-        let processor = context.createScriptProcessor(1024, 1, 1)
+        processor = context.createScriptProcessor(1024, 1, 1)
 
         input.connect(processor)
         processor.connect(context.destination)
@@ -34,8 +35,10 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     let url
-    player.srcObject = blobs;
+    player.srcObject = blobs
     lstream.getTracks().forEach(track => track.stop())  
+    processor.disconnect()
+    processor.onaudioprocess = null
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
 });
