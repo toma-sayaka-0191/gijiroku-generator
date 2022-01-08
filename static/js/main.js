@@ -23,6 +23,7 @@ startButton.addEventListener('click', function () {
         processor.onaudioprocess = function(e) {
             console.log(e.inputBuffer.getChannelData(0))
             if(flg == false){
+                stream.getTracks().forEach(track => track.stop())
                 player.src = e
                 dla.href = e
                 dla.download = 'voice_' + cnt + '.wav'
