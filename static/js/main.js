@@ -6,35 +6,37 @@ const tbody = document.getElementById('tbody');
 let cnt = 0;
 let player;
 let dla;
-let flg;
+let processor;
 
 // start button
 startButton.addEventListener('click', function () {
-    flg=true
     AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
-        let processor = context.createScriptProcessor(1024, 1, 1)
+        processor = context.createScriptProcessor(1024, 1, 1)
 
         input.connect(processor)
         processor.connect(context.destination)
         processor.onaudioprocess = function(e) {
+            if (e.data && e.data.size > 0) {
+                blobs.push(e.data);
+              }
             console.log(e.inputBuffer.getChannelData(0))
-            if(flg == false){
-                player.src = e
-                dla.href = e
-                dla.download = 'voice_' + cnt + '.wav'
-                return
-            }
         }
     })
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    flg=false
+    let url
+    processor.disconnect()
+    processor.onaudioprocess = null
+    url = window.URL.createObjectURL(new Blob(blobs));
+    player.src = url
+//    dla.href = url
+//    dla.download = 'voice_' + cnt + '.wav'
 });
 
 function AddRow(){
