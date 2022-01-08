@@ -20,18 +20,18 @@ startButton.addEventListener('click', function () {
         let input = context.createMediaStreamSource(stream)
         let processor = context.createScriptProcessor(1024, 1, 1)
 
-        input.connect(processor)
-        processor.connect(context.destination)
-        processor.onaudioprocess = function(e) {
-            console.log(e.inputBuffer.getChannelData(0))
-        }
-
         lstream = stream
         mr = new MediaRecorder(stream)
         mr.ondataavailable = function(e) {
             player.src = e
             dla.href = e
             dla.download = 'voice_' + cnt + '.wav'
+        }
+
+        input.connect(processor)
+        processor.connect(context.destination)
+        processor.onaudioprocess = function(e) {
+            console.log(e.inputBuffer.getChannelData(0))
         }
     })
 });
