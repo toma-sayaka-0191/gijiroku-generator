@@ -24,15 +24,12 @@ startButton.addEventListener('click', function () {
 
 // stop button
 stopButton.addEventListener('click', function () {
-    let url = exportWAV(audioData)
-    downloadLink.href = url
-    player.src = url
-    downloadLink.download = 'test.wav'
-    audioContext.close()
+
 });
 
 function AddRow(){
     cnt+= 1
+    audioData = [];
     tbody.insertAdjacentHTML('beforeend', "<tr><td><audio id='player" + cnt + "' controls src=''></audio></td><td><a id='downloadLink" + cnt + "'>DL</a></td></tr>")
     player = document.getElementById('player' + cnt)
     downloadLink = document.getElementById('downloadLink' + cnt)
@@ -56,8 +53,14 @@ var onAudioProcess = function (e) {
     for (var i = 0; i < bufferSize; i++) {
         bufferData[i] = input[i];
     }
-    console.log(bufferData);
     audioData.push(bufferData);
+    if (Math.abs(bufferData[0])<0.01){
+        let url = exportWAV(audioData)
+        downloadLink.href = url
+        player.src = url
+        downloadLink.download = 'test.wav'
+        audioContext.close()
+    }
 };
 
 // export WAV from audio float data
