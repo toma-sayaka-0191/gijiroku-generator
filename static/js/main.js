@@ -34,7 +34,7 @@ stopButton.addEventListener('click', function () {
     let url
     processor.disconnect()
     processor.onaudioprocess = null
-    url = window.URL.createObjectURL(new Blob(blobs));
+    url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
     player.src = url
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
