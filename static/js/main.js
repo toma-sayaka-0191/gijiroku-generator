@@ -59,7 +59,7 @@ var onAudioProcess = function (e) {
         bufferData[i] = input[i];
     }
     audioData.push(bufferData);
-    
+
     console.log(Math.abs(bufferData[0]));
 
     if (Math.abs(bufferData[0])>0.01){
@@ -72,7 +72,7 @@ var onAudioProcess = function (e) {
         player.src = url
         downloadLink.download = 'test.wav'
         audioContext.close()
-        if (stopFlg == true){
+        if (stopFlg == false){
             AddRow()
             navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
             maxBufFlg=false
