@@ -25,12 +25,10 @@ startButton.addEventListener('click', function () {
         input.connect(processor)
         processor.connect(context.destination)
         processor.onaudioprocess = function(e) {
-            if (flg == true) {
-                if (e.data && e.data.size > 0) {
-                    blobs.push(e.data);
-                }
-                console.log(e.inputBuffer.getChannelData(0))
+            if (e.data && e.data.size > 0) {
+                blobs.push(e.data);
             }
+            console.log(e.inputBuffer.getChannelData(0))
         }
     })
 });
@@ -40,7 +38,7 @@ stopButton.addEventListener('click', function () {
     let url
     flg=false
     lstream.getTracks().forEach(track => track.stop())
-    url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
+    url = window.URL.createObjectURL(blobs);
     player.src = url    
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
