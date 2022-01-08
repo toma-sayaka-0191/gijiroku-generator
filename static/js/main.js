@@ -36,10 +36,10 @@ startButton.addEventListener('click', function () {
 stopButton.addEventListener('click', function () {
     let url
     lstream.getTracks().forEach(track => track.stop())
-    //processor.disconnect()
-    //processor.onaudioprocess = null
     url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
     player.src = url    
+    processor.disconnect()
+    processor.onaudioprocess = null
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
 });
