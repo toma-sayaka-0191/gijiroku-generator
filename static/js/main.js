@@ -38,8 +38,8 @@ stopButton.addEventListener('click', function () {
     lstream.getTracks().forEach(track => track.stop())
     url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
     player.src = url    
-    //processor.disconnect()
-    processor.onaudioprocess = null
+    processor.disconnect()
+    //processor.onaudioprocess = null
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
 });
