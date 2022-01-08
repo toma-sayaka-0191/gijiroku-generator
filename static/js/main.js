@@ -32,10 +32,10 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     let url
+    url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
+    player.src = url
     processor.disconnect()
     processor.onaudioprocess = null
-    //url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
-    player.src = blobs
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
 });
