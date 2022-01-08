@@ -15,7 +15,7 @@ startButton.addEventListener('click', function () {
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
         lstream=stream
-
+        
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
         let processor = context.createScriptProcessor(1024, 1, 1)
@@ -34,7 +34,7 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     let url
-    player.srcObject = lstream;
+    player.srcObject = blobs;
     lstream.getTracks().forEach(track => track.stop())  
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
