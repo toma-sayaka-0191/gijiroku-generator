@@ -8,12 +8,15 @@ let player;
 let dla;
 let blobs;
 let processor;
+let lstream;
 
 // start button
 startButton.addEventListener('click', function () {
     AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
+        lstream=stream
+
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
         processor = context.createScriptProcessor(1024, 1, 1)
@@ -32,10 +35,11 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     let url
-    url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
-    player.src = url
+    lstream.getTracks().forEach(track => track.stop())
     processor.disconnect()
     processor.onaudioprocess = null
+    url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
+    player.src = url    
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
 });
