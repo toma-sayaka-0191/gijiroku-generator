@@ -19,6 +19,7 @@ let bufferSize = 1024;
 let stopFlg;
 let maxBufFlg;
 let elapsedTime, startTime, nowTime;
+let muonFlg;
 
 // start button
 startButton.addEventListener('click', function () {
@@ -64,13 +65,24 @@ var onAudioProcess = function (e) {
 
     if (maxBufFlg==false && Math.abs(bufferData[0])>0.01){
         maxBufFlg=true
-        startTime = new Date();
+    }
+
+    if (Math.abs(bufferData[0])>0.01){
+        muonFlg=false
     }
 
     if (maxBufFlg==true){
+        audioData.push(bufferData);
+    }
+
+    if (maxBufFlg==true && muonFlg==false && Math.abs(bufferData[0])<0.01){
+        muonFlg==true
+        startTime = new Date();
+    }
+
+    if (maxBufFlg==true && muonFlg==true && Math.abs(bufferData[0])<0.01){
         nowTime = new Date();
         elapsedTime = Math.floor((nowTime - startTime) / 1000);
-        audioData.push(bufferData);
     }
 
     if (maxBufFlg==true && elapsedTime > 2 && Math.abs(bufferData[0])<0.01){
