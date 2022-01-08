@@ -8,6 +8,7 @@ let player;
 let dla;
 let mr;
 let flg;
+let lstream;
 
 // start button
 startButton.addEventListener('click', function () {
@@ -23,25 +24,23 @@ startButton.addEventListener('click', function () {
         processor.connect(context.destination)
         processor.onaudioprocess = function(e) {
             console.log(e.inputBuffer.getChannelData(0))
-            if (flg == false) {
-                mr.stop()
-            }
         }
 
+        lstream = stream
         mr = new MediaRecorder(stream)
-        mr.start()
         mr.ondataavailable = function(e) {
             player.src = e
             dla.href = e
             dla.download = 'voice_' + cnt + '.wav'
         }
-                    
     })
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    flg=false
+    lstream.getTracks().forEach((track) => {
+        track.stop()
+    })
 });
 
 function AddRow(){
