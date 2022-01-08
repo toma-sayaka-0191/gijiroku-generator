@@ -42,7 +42,6 @@ function AddRow(){
 let handleSuccess = function (stream) {
     audioContext = new AudioContext();
     audio_sample_rate = audioContext.sampleRate;
-    console.log(audio_sample_rate);
     scriptProcessor = audioContext.createScriptProcessor(bufferSize, 1, 1);
     var mediastreamsource = audioContext.createMediaStreamSource(stream);
     mediastreamsource.connect(scriptProcessor);
@@ -57,6 +56,7 @@ var onAudioProcess = function (e) {
     for (var i = 0; i < bufferSize; i++) {
         bufferData[i] = input[i];
     }
+    console.log(bufferData);
     audioData.push(bufferData);
 };
 
