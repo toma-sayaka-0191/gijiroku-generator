@@ -7,7 +7,6 @@ let cnt = 0;
 let player;
 let dla;
 let blobs;
-let processor;
 let lstream;
 
 // start button
@@ -19,7 +18,7 @@ startButton.addEventListener('click', function () {
 
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
-        processor = context.createScriptProcessor(1024, 1, 1)
+        let processor = context.createScriptProcessor(1024, 1, 1)
 
         input.connect(processor)
         processor.connect(context.destination)
@@ -38,8 +37,6 @@ stopButton.addEventListener('click', function () {
     lstream.getTracks().forEach(track => track.stop())
     url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
     player.src = url    
-    processor.disconnect()
-    //processor.onaudioprocess = null
 //    dla.href = url
 //    dla.download = 'voice_' + cnt + '.wav'
 });
