@@ -7,20 +7,14 @@ let cnt = 0;
 let player;
 let dla;
 let mr;
-let lstream;
+let flg;
 
 // start button
 startButton.addEventListener('click', function () {
+    flg=true
     AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
-        lstream=stream
-        mr = new MediaRecorder(stream)
-        mr.ondataavailable = function(e) {
-            player.src = e
-            dla.href = e
-            dla.download = 'voice_' + cnt + '.wav'
-        }
         let context = new AudioContext()
         let input = context.createMediaStreamSource(stream)
         let processor = context.createScriptProcessor(1024, 1, 1)
@@ -28,17 +22,30 @@ startButton.addEventListener('click', function () {
         input.connect(processor)
         processor.connect(context.destination)
 
+        lstream=stream
+        mr = new MediaRecorder(stream)
+
+        mr.ondataavailable = function(e) {
+            player.src = e
+            dla.href = e
+            dla.download = 'voice_' + cnt + '.wav'
+        }
+
         processor.onaudioprocess = function(e) {
             console.log(e.inputBuffer.getChannelData(0))
+            if (flg == false) {
+                mr.stop()
+            }
         }
         mr.start();
+        Do
+    
     })
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    mr.stop();
-    lstream.getTracks().forEach(track => track.stop())
+    flg=false
 });
 
 function AddRow(){
