@@ -16,15 +16,20 @@ let audioContext = null;
 let audioData = [];
 let bufferSize = 1024;
 
+let stopFlg;
+let maxBufFlg;
+
 // start button
 startButton.addEventListener('click', function () {
+    stopFlg=false
     AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
+    maxBufFlg=false
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-
+    stopFlg=true
 });
 
 function AddRow(){
@@ -54,15 +59,24 @@ var onAudioProcess = function (e) {
         bufferData[i] = input[i];
     }
     audioData.push(bufferData);
+    
     console.log(Math.abs(bufferData[0]));
-    if (Math.abs(bufferData[0])<0.01){
+
+    if (Math.abs(bufferData[0])>0.01){
+        maxBufFlg=true
+    }
+
+    if (maxBufFlg==true && Math.abs(bufferData[0])<0.01){
         let url = exportWAV(audioData)
         downloadLink.href = url
         player.src = url
         downloadLink.download = 'test.wav'
         audioContext.close()
-        AddRow()
-        navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
+        if (stopFlg == true){
+            AddRow()
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
+            maxBufFlg=false
+        }
     }
 };
 
