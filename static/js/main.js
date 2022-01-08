@@ -18,6 +18,7 @@ let bufferSize = 1024;
 
 let stopFlg;
 let maxBufFlg;
+let elapsedTime, startTime, nowTime;
 
 // start button
 startButton.addEventListener('click', function () {
@@ -62,11 +63,17 @@ var onAudioProcess = function (e) {
 
     console.log(Math.abs(bufferData[0]));
 
-    if (Math.abs(bufferData[0])>0.01){
+    if (maxBufFlg==false && Math.abs(bufferData[0])>0.01){
         maxBufFlg=true
+        startTime = new Date();
     }
 
-    if (maxBufFlg==true && Math.abs(bufferData[0])<0.01){
+    if (maxBufFlg==true){
+        nowTime = new Date();
+        elapsedTime = Math.floor((nowTime - startTime) / 1000);
+    }
+
+    if (maxBufFlg==true && elapsedTime > 2 && Math.abs(bufferData[0])<0.01){
         let url = exportWAV(audioData)
         downloadLink.href = url
         player.src = url
