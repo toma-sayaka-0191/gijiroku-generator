@@ -78,6 +78,7 @@ var onAudioProcess = function (e) {
         downloadLink.href = url
         player.src = url
         downloadLink.download = 'test.wav'
+        audioContext.close()
         if (stopFlg == false){
             AddRow()
             navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
