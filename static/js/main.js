@@ -6,9 +6,7 @@ const tbody = document.getElementById('tbody');
 let cnt = 0;
 let player;
 let dla;
-let mr;
 let flg;
-let lstream;
 
 // start button
 startButton.addEventListener('click', function () {
@@ -20,27 +18,22 @@ startButton.addEventListener('click', function () {
         let input = context.createMediaStreamSource(stream)
         let processor = context.createScriptProcessor(1024, 1, 1)
 
-        lstream = stream
-        mr = new MediaRecorder(stream)
-        mr.ondataavailable = function(e) {
-            player.src = e
-            dla.href = e
-            dla.download = 'voice_' + cnt + '.wav'
-        }
-
         input.connect(processor)
         processor.connect(context.destination)
         processor.onaudioprocess = function(e) {
             console.log(e.inputBuffer.getChannelData(0))
+            if(flg == false){
+                player.src = e
+                dla.href = e
+                dla.download = 'voice_' + cnt + '.wav'
+            }
         }
     })
 });
 
 // stop button
 stopButton.addEventListener('click', function () {
-    lstream.getTracks().forEach((track) => {
-        track.stop()
-    })
+    flg=false
 });
 
 function AddRow(){
