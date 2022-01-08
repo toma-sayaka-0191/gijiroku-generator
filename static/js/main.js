@@ -8,9 +8,11 @@ let player;
 let dla;
 let blobs;
 let lstream;
+let flg;
 
 // start button
 startButton.addEventListener('click', function () {
+    flg=true
     AddRow()
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
@@ -23,10 +25,12 @@ startButton.addEventListener('click', function () {
         input.connect(processor)
         processor.connect(context.destination)
         processor.onaudioprocess = function(e) {
-            if (e.data && e.data.size > 0) {
-                blobs.push(e.data);
-              }
-            console.log(e.inputBuffer.getChannelData(0))
+            if (flg == true) {
+                if (e.data && e.data.size > 0) {
+                    blobs.push(e.data);
+                }
+                console.log(e.inputBuffer.getChannelData(0))
+            }
         }
     })
 });
@@ -34,6 +38,7 @@ startButton.addEventListener('click', function () {
 // stop button
 stopButton.addEventListener('click', function () {
     let url
+    flg=false
     lstream.getTracks().forEach(track => track.stop())
     url = window.URL.createObjectURL(new Blob(blobs),{type:"audio/webm"});
     player.src = url    
