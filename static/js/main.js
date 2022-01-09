@@ -21,6 +21,8 @@ let maxBufFlg;
 let elapsedTime, startTime, nowTime;
 let muonFlg;
 
+let lstream;
+
 // start button
 startButton.addEventListener('click', function () {
     stopFlg=false
@@ -44,6 +46,7 @@ function AddRow(){
 
 // getusermedia
 let handleSuccess = function (stream) {
+    lstream=stream;
     audioContext = new AudioContext();
     audio_sample_rate = audioContext.sampleRate;
     scriptProcessor = audioContext.createScriptProcessor(bufferSize, 1, 1);
@@ -96,6 +99,9 @@ var onAudioProcess = function (e) {
             navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
             maxBufFlg=false
         }
+    }
+    if (stopFlg == true){
+        lstream.getTracks().forEach(track => track.stop())
     }
 };
 
