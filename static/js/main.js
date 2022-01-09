@@ -88,7 +88,7 @@ var onAudioProcess = function (e) {
         elapsedTime = Math.floor((nowTime - startTime) / 1000);
     }
 
-    if (stopFlg == true || (maxBufFlg==true && elapsedTime > 2 && Math.abs(bufferData[0])<0.01)){
+    if (stopFlg == true || (maxBufFlg==true && elapsedTime > 1 && Math.abs(bufferData[0])<0.01)){
         let url = exportWAV(audioData)
         downloadLink.href = url
         player.src = url
