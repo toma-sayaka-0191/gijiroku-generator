@@ -94,14 +94,16 @@ var onAudioProcess = function (e) {
         player.src = url
         downloadLink.download = 'test.wav'
         audioContext.close()
+        lstream.getTracks().forEach(track => track.stop())
         if (stopFlg == false){
             AddRow()
-            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess)
             maxBufFlg=false
         }
     }
     if (stopFlg == true){
-        lstream.getTracks().forEach(track => track.stop())
+        scriptProcessor.disconnect()
+        scriptProcessor.onaudioprocess = null
     }
 };
 
